@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>LeafDairy</AssemblyName>
+    <Title>Leaf Dairy</Title>
+    <Product>Leaf Dairy</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="..\Assets\diary-dusk-background.png">
+      <Link>Assets\diary-dusk-background.png</Link>
+    </Resource>
+    <Resource Include="..\Assets\side f.png">
+      <Link>Assets\side-feather.png</Link>
+    </Resource>
+    <Resource Include="..\Assets\side.png">
+      <Link>Assets\sidebar-sunset.png</Link>
+    </Resource>
+    <Resource Include="..\Assets\logo.png">
+      <Link>Assets\app-logo.png</Link>
+    </Resource>
+  </ItemGroup>
+
+</Project>

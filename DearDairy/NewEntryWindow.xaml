@@ -1,0 +1,84 @@
+<UserControl x:Class="DearDairy.NewEntryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="#080A0E" Foreground="#F3E8D4" FontFamily="Segoe UI" UseLayoutRounding="True">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Gold" Color="#E1A64F"/>
+        <SolidColorBrush x:Key="GoldMuted" Color="#B98949"/>
+        <SolidColorBrush x:Key="Panel" Color="#D90A0D12"/>
+        <SolidColorBrush x:Key="Panel2" Color="#E6101319"/>
+        <SolidColorBrush x:Key="Line" Color="#63431F"/>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource Panel}"/><Setter Property="BorderBrush" Value="{StaticResource Line}"/>
+            <Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="12"/>
+        </Style>
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="Height" Value="42"/><Setter Property="Padding" Value="15,0"/><Setter Property="Foreground" Value="#EACB98"/>
+            <Setter Property="Background" Value="#B20D1015"/><Setter Property="BorderBrush" Value="#5B3B1C"/><Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border x:Name="B" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="B" Property="Background" Value="#392515"/><Setter Property="Foreground" Value="#FFD58A"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+        </Style>
+        <Style x:Key="RoundMic" TargetType="Button">
+            <Setter Property="Width" Value="84"/><Setter Property="Height" Value="84"/><Setter Property="Background" Value="#1A1510"/>
+            <Setter Property="Foreground" Value="#FFC766"/><Setter Property="BorderBrush" Value="#E4A33D"/><Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Cursor" Value="Hand"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Grid><Ellipse Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/><Ellipse x:Name="Glow" Margin="-7" Stroke="#5CDA9A38" StrokeThickness="1" Opacity="0"/><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Grid><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Glow" Property="Opacity" Value="1"/><Setter Property="Background" Value="#302113"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush Center="0.5,0.28" GradientOrigin="0.5,0.28" RadiusX="0.8" RadiusY="0.8">
+                <GradientStop Color="#1A1510"/>
+                <GradientStop Color="#0B0E13" Offset="0.55"/>
+                <GradientStop Color="#06080C" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <ScrollViewer Width="760" HorizontalAlignment="Center" VerticalScrollBarVisibility="Hidden" PanningMode="VerticalOnly">
+            <Grid Margin="34,28,34,30"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                <Grid Margin="0,0,0,20">
+                    <StackPanel><TextBlock Text="Good Evening, Arav  ✦" FontFamily="Georgia" FontSize="28" Foreground="#F4BD61"/><TextBlock Text="Every word you write becomes a chapter of your Leaf Dairy." Foreground="#D0B88E" FontSize="13" Margin="2,7,0,0"/></StackPanel>
+                    <Button Style="{StaticResource ActionButton}" Width="38" Height="38" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top" Content="✕" Click="Close_Click" ToolTip="Close"/>
+                </Grid>
+
+                <Border Grid.Row="1" Style="{StaticResource Card}" Padding="22,18,22,20">
+                    <StackPanel>
+                        <TextBlock Text="What's on your mind today?" FontFamily="Georgia" Foreground="#F1C678" FontSize="17"/>
+                        <TextBlock Text="Speak your thoughts or let AI write for you..." Foreground="#BBA67F" Margin="0,5,0,18"/>
+                        <Grid HorizontalAlignment="Center" Margin="0,2,0,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <StackPanel x:Name="LeftWave" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,18,0">
+                                    <Rectangle x:Name="Wave1" Width="3" Height="12" Fill="#B87A28" Margin="2"/><Rectangle x:Name="Wave2" Width="3" Height="24" Fill="#D89431" Margin="2"/><Rectangle x:Name="Wave3" Width="3" Height="34" Fill="#E7AA45" Margin="2"/><Rectangle x:Name="Wave4" Width="3" Height="18" Fill="#C5842B" Margin="2"/><Rectangle x:Name="Wave5" Width="3" Height="28" Fill="#E4A13B" Margin="2"/>
+                                </StackPanel>
+                                <Button x:Name="MicButton" Style="{StaticResource RoundMic}" Click="MicButton_Click"><TextBlock Text="&#xE720;" FontFamily="Segoe MDL2 Assets" FontSize="35"/></Button>
+                                <StackPanel x:Name="RightWave" Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0,0,0">
+                                    <Rectangle x:Name="Wave6" Width="3" Height="28" Fill="#E4A13B" Margin="2"/><Rectangle x:Name="Wave7" Width="3" Height="18" Fill="#C5842B" Margin="2"/><Rectangle x:Name="Wave8" Width="3" Height="34" Fill="#E7AA45" Margin="2"/><Rectangle x:Name="Wave9" Width="3" Height="24" Fill="#D89431" Margin="2"/><Rectangle x:Name="Wave10" Width="3" Height="12" Fill="#B87A28" Margin="2"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock x:Name="MicStatus" Text="Tap to speak" Foreground="#CBB997" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+                        <TextBlock Text="OR" Foreground="#8E806B" HorizontalAlignment="Center" Margin="0,10" FontSize="11"/>
+                        <Button Style="{StaticResource ActionButton}" Width="220" Content="✎  Write with AI" Click="WriteWithAI_Click"/>
+                        <Border x:Name="EditorPanel" Visibility="Collapsed" Background="#B2070A0E" BorderBrush="#51371D" BorderThickness="1" CornerRadius="8" Margin="0,16,0,0" Padding="12">
+                            <Grid><Grid.RowDefinitions><RowDefinition/><RowDefinition Height="44"/></Grid.RowDefinitions>
+                                <TextBox x:Name="EntryEditor" MinHeight="105" AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" Foreground="#F0E7D9" BorderThickness="0" FontSize="14" CaretBrush="#F4B752" Text="Start writing your story..."/>
+                                <Button Grid.Row="1" Style="{StaticResource ActionButton}" Content="Save Entry" HorizontalAlignment="Right" Width="120" Margin="0,7,0,0" Click="Save_Click"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <Grid Grid.Row="2" Margin="0,24,0,9"><TextBlock Text="Recent Entries" FontFamily="Georgia" Foreground="#EAC077" FontSize="16"/><Button Content="View all" Foreground="#D7B575" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Cursor="Hand"/></Grid>
+                <Border Grid.Row="3" Style="{StaticResource Card}" Padding="12,3">
+                    <StackPanel>
+                        <Grid Margin="0,8"><Grid.ColumnDefinitions><ColumnDefinition Width="62"/><ColumnDefinition/><ColumnDefinition Width="100"/></Grid.ColumnDefinitions><Border Width="52" Height="52" CornerRadius="7"><Border.Background><ImageBrush ImageSource="Assets/diary-dusk-background.png" Stretch="UniformToFill"/></Border.Background></Border><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="The Rise of Aethelgard" Foreground="#F0C87F"/><TextBlock Text="The sun rose over the forgotten valley..." Foreground="#AFA38E" FontSize="12" Margin="0,5,0,0"/></StackPanel><TextBlock Grid.Column="2" Text="May 24, 2025" Foreground="#A9987D" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Top"/></Grid>
+                        <Separator Background="#3E2D1C"/>
+                        <Grid Margin="0,8"><Grid.ColumnDefinitions><ColumnDefinition Width="62"/><ColumnDefinition/><ColumnDefinition Width="100"/></Grid.ColumnDefinitions><Border Width="52" Height="52" CornerRadius="7" Background="#2A1D10"><TextBlock Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" FontSize="24" Foreground="#D99C3E" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="A Promise in the Dark" Foreground="#F0C87F"/><TextBlock Text="In the shadows, a promise was made..." Foreground="#AFA38E" FontSize="12" Margin="0,5,0,0"/></StackPanel><TextBlock Grid.Column="2" Text="May 23, 2025" Foreground="#A9987D" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Top"/></Grid>
+                        <Separator Background="#3E2D1C"/>
+                        <Grid Margin="0,8"><Grid.ColumnDefinitions><ColumnDefinition Width="62"/><ColumnDefinition/><ColumnDefinition Width="100"/></Grid.ColumnDefinitions><Border Width="52" Height="52" CornerRadius="7" Background="#172319"><TextBlock Text="&#xE81C;" FontFamily="Segoe MDL2 Assets" FontSize="24" Foreground="#B4C56B" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Whispers of the Ancient" Foreground="#F0C87F"/><TextBlock Text="The trees remember what humans forget..." Foreground="#AFA38E" FontSize="12" Margin="0,5,0,0"/></StackPanel><TextBlock Grid.Column="2" Text="May 22, 2025" Foreground="#A9987D" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Top"/></Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="4" Style="{StaticResource Card}" Margin="0,20,0,0" Padding="12"><StackPanel><TextBlock Text="Quick Actions" Foreground="#EBC47E" Margin="2,0,0,9"/><UniformGrid Columns="5"><Button Style="{StaticResource ActionButton}" Content="New Entry" Margin="3" Click="QuickAction_Click"/><Button Style="{StaticResource ActionButton}" Content="New Chapter" Margin="3" Click="QuickAction_Click"/><Button Style="{StaticResource ActionButton}" Content="Character" Margin="3" Click="QuickAction_Click"/><Button Style="{StaticResource ActionButton}" Content="New Idea" Margin="3" Click="QuickAction_Click"/><Button Style="{StaticResource ActionButton}" Content="Voice Note" Margin="3" Click="MicButton_Click"/></UniformGrid></StackPanel></Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

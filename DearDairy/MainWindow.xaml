@@ -1,0 +1,249 @@
+<Window x:Class="DearDairy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DearDairy"
+        Title="Leaf Dairy" Icon="Assets/app-logo.png" Width="1536" Height="1024" MinWidth="1180" MinHeight="760"
+        WindowStartupLocation="CenterScreen" Background="#070A0F" FontFamily="Segoe UI"
+        Foreground="#F2EDE4" UseLayoutRounding="True">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Surface" Color="#0D121A"/>
+        <SolidColorBrush x:Key="Surface2" Color="#121821"/>
+        <SolidColorBrush x:Key="Stroke" Color="#3B2D20"/>
+        <SolidColorBrush x:Key="Muted" Color="#A9A197"/>
+        <SolidColorBrush x:Key="Purple" Color="#D69A45"/>
+        <LinearGradientBrush x:Key="PurpleGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#9C6426"/><GradientStop Color="#E0A34F" Offset="1"/>
+        </LinearGradientBrush>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        </Style>
+        <Style x:Key="Icon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/><Setter Property="FontSize" Value="17"/>
+            <Setter Property="VerticalAlignment" Value="Center"/><Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="NavButton" TargetType="Button">
+            <Setter Property="Height" Value="52"/><Setter Property="Margin" Value="16,3"/>
+            <Setter Property="Foreground" Value="#D5DAE8"/><Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/><Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="15"/><Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value><ControlTemplate TargetType="Button"><Border x:Name="B" Background="{TemplateBinding Background}" CornerRadius="8" Padding="17,0"><ContentPresenter VerticalAlignment="Center"/></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="B" Property="Background" Value="#2B2118"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ActiveNav" TargetType="Button" BasedOn="{StaticResource NavButton}">
+            <Setter Property="Background" Value="#3A281B"/><Setter Property="Foreground" Value="#F3C77C"/>
+        </Style>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource Surface}"/><Setter Property="BorderBrush" Value="{StaticResource Stroke}"/>
+            <Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="GhostButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#DDD6CC"/><Setter Property="Background" Value="#10151D"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Stroke}"/><Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,9"/><Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border></ControlTemplate></Setter.Value></Setter>
+        </Style>
+        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource GhostButton}">
+            <Setter Property="Background" Value="{StaticResource PurpleGradient}"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Foreground" Value="White"/><Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="Tag" TargetType="Border">
+            <Setter Property="Background" Value="#1B1714"/><Setter Property="CornerRadius" Value="16"/><Setter Property="Padding" Value="14,8"/><Setter Property="Margin" Value="0,0,7,7"/>
+        </Style>
+        <Style x:Key="Metric" TargetType="Border" BasedOn="{StaticResource Card}">
+            <Setter Property="Background" Value="#121821"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Padding" Value="12"/><Setter Property="Margin" Value="4"/>
+        </Style>
+        <Style x:Key="TimelineCard" TargetType="Border" BasedOn="{StaticResource Card}">
+            <Setter Property="Background" Value="#0F151E"/>
+            <Setter Property="Padding" Value="18,14"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+        <Style x:Key="TimelineAction" TargetType="Button">
+            <Setter Property="Width" Value="32"/><Setter Property="Height" Value="32"/>
+            <Setter Property="Foreground" Value="#C99A5C"/><Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/><Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/><Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border x:Name="ActionBg" CornerRadius="6" Background="{TemplateBinding Background}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ActionBg" Property="Background" Value="#283249"/><Setter Property="Foreground" Value="White"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background><RadialGradientBrush Center="0.52,0.4" GradientOrigin="0.52,0.4" RadiusX="0.85" RadiusY="0.85"><GradientStop Color="#17130F"/><GradientStop Color="#070A0F" Offset="1"/></RadialGradientBrush></Grid.Background>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="245"/><ColumnDefinition Width="*"/><ColumnDefinition Width="0"/></Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Panel.ZIndex="5" Background="Transparent" BorderThickness="0" ClipToBounds="False">
+            <Grid>
+                <Grid.Background><SolidColorBrush Color="Transparent"/></Grid.Background>
+                <Grid.RowDefinitions><RowDefinition Height="84"/><RowDefinition/><RowDefinition Height="0"/></Grid.RowDefinitions>
+                <Border Grid.RowSpan="3" IsHitTestVisible="False">
+                    <Border.Background>
+                        <ImageBrush ImageSource="Assets/sidebar-sunset.png" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Center" Opacity="0.96"/>
+                    </Border.Background>
+                </Border>
+                <Border Grid.RowSpan="3" IsHitTestVisible="False">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#6804070C"/>
+                            <GradientStop Color="#30060405" Offset="0.36"/>
+                            <GradientStop Color="#14000000" Offset="0.62"/>
+                            <GradientStop Color="#5204070C" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Grid.RowSpan="3" Panel.ZIndex="5" BorderThickness="0" Background="Transparent" IsHitTestVisible="False">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#4A2D14"/>
+                            <GradientStop Color="#D09442" Offset="0.18"/>
+                            <GradientStop Color="#7C4E22" Offset="0.55"/>
+                            <GradientStop Color="#D09442" Offset="0.86"/>
+                            <GradientStop Color="#4A2D14" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                </Border>
+                <Border BorderBrush="#222C40" BorderThickness="0,0,0,1" Margin="14,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0">
+                        <Border Width="48" Height="56">
+                            <Border.Background><ImageBrush ImageSource="Assets/app-logo.png" Stretch="Uniform" Viewbox="0.20,0.05,0.60,0.84" ViewboxUnits="RelativeToBoundingBox"/></Border.Background>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center" Margin="8,0,0,0"><TextBlock Text="Leaf Dairy" FontFamily="Georgia" FontSize="21" Foreground="#F4D59A"/><TextBlock Text="Write. Reflect. Grow." FontSize="10" Foreground="#B9AA91" Margin="1,3,0,0"/></StackPanel>
+                    </StackPanel>
+                </Border>
+                <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                    <Button Style="{StaticResource ActiveNav}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE70B;" Width="24"/><TextBlock Text="Daily Diary" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE81C;" Width="24"/><TextBlock Text="Timeline" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE8A5;" Width="24"/><TextBlock Text="Stories" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE77B;" Width="24"/><TextBlock Text="Characters" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE774;" Width="24"/><TextBlock Text="World Building" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE946;" Width="24"/><TextBlock Text="Ideas Vault" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE787;" Width="24"/><TextBlock Text="Calendar" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE9D2;" Width="24"/><TextBlock Text="Analytics" Margin="14,0,0,0"/></StackPanel></Button>
+                    <Button Style="{StaticResource NavButton}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE713;" Width="24"/><TextBlock Text="Settings" Margin="14,0,0,0"/></StackPanel></Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main content -->
+        <Grid Grid.Column="1" Margin="26,20,22,22"><Grid.RowDefinitions><RowDefinition Height="0"/><RowDefinition Height="76"/><RowDefinition Height="*"/><RowDefinition Height="0"/></Grid.RowDefinitions>
+            <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,10,0,14" ClipToBounds="True">
+                <Grid>
+                    <Grid.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#0D1117"/><GradientStop Color="#17120D" Offset="0.6"/><GradientStop Color="#090D13" Offset="1"/></LinearGradientBrush></Grid.Background>
+                    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="0"/><RowDefinition Height="2"/></Grid.RowDefinitions>
+                    <StackPanel Visibility="Collapsed" Orientation="Horizontal" Margin="16,0" VerticalAlignment="Center">
+                        <Button Style="{StaticResource GhostButton}" Width="36" Height="36" Padding="0" Content="‹" FontSize="25" ToolTip="Previous day"/>
+                        <Button Style="{StaticResource GhostButton}" Width="36" Height="36" Padding="0" Content="›" FontSize="25" Margin="8,0,0,0" ToolTip="Next day"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Thursday, 15 May 2025" FontFamily="Georgia" FontSize="22"/><TextBlock Text="Selected date" Foreground="#9EA7BA" FontSize="11" HorizontalAlignment="Center" Margin="0,2,0,0"/></StackPanel>
+                    <Border Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,14,0" Background="#101725" BorderBrush="#2A3347" BorderThickness="1" CornerRadius="8" Padding="3">
+                        <StackPanel Orientation="Horizontal"><Border Background="#4A3525" BorderBrush="#A7773F" BorderThickness="1" CornerRadius="6" Padding="13,7"><TextBlock Text="Day" Foreground="#FFD79A"/></Border><TextBlock Text="Week" Foreground="#9EA7BA" Margin="14,8"/><TextBlock Text="Month" Foreground="#9EA7BA" Margin="8,8,12,8"/><TextBlock Style="{StaticResource Icon}" Text="&#xE787;" Foreground="#AAB4C8" Margin="2,0,4,0"/></StackPanel>
+                    </Border>
+                    <UniformGrid Visibility="Collapsed" Grid.Row="1" Columns="9" Margin="28,3,28,3">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Sun" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="11" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#747D90" Width="6" Height="6"/></StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Mon" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="12" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#747D90" Width="6" Height="6"/></StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Tue" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="13" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#A78B72" Width="6" Height="6"/></StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Wed" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="14" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#747D90" Width="6" Height="6"/></StackPanel>
+                        <Border Width="76" Height="76" CornerRadius="38" BorderBrush="#D49A4B" BorderThickness="1" Background="#30261F" HorizontalAlignment="Center" VerticalAlignment="Center"><StackPanel VerticalAlignment="Center"><TextBlock Text="Thu" Foreground="#E8C68E" HorizontalAlignment="Center"/><TextBlock Text="15" FontFamily="Georgia" FontSize="27" Foreground="#FFD28A" HorizontalAlignment="Center"/><TextBlock Text="✦" Foreground="#D9A153" FontSize="10" HorizontalAlignment="Center"/></StackPanel></Border>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Fri" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="16" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#C58E60" Width="6" Height="6"/></StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Sat" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="17" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#9A8877" Width="6" Height="6"/></StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Sun" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="18" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#747D90" Width="6" Height="6"/></StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Mon" Foreground="#8F99AD" HorizontalAlignment="Center"/><TextBlock Text="19" FontFamily="Georgia" FontSize="20" HorizontalAlignment="Center" Margin="0,5"/><Ellipse Fill="#747D90" Width="6" Height="6"/></StackPanel>
+                    </UniformGrid>
+                    <Border Grid.Row="2"><Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="Transparent"/><GradientStop Color="#C98A43" Offset="0.5"/><GradientStop Color="Transparent" Offset="1"/></LinearGradientBrush></Border.Background></Border>
+                </Grid>
+            </Border>
+            <Border Grid.Row="2" Style="{StaticResource Card}" ClipToBounds="True">
+                <Border.Background><ImageBrush ImageSource="Assets/diary-dusk-background.png" Stretch="UniformToFill" Opacity="0.30" AlignmentY="Bottom"/></Border.Background>
+                <Grid><Grid.RowDefinitions><RowDefinition Height="68"/><RowDefinition/></Grid.RowDefinitions>
+                    <Grid Margin="24,0"><StackPanel VerticalAlignment="Center"><TextBlock Text="Diary Timeline" FontFamily="Georgia" FontSize="20"/><TextBlock Text="4 entries  •  507 words" Foreground="#929DB2" FontSize="12" Margin="0,3,0,0"/></StackPanel><Button Style="{StaticResource PrimaryButton}" Content="＋  New Entry" HorizontalAlignment="Right" VerticalAlignment="Center" Click="NewEntry_Click"/></Grid>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Padding="20,0,20,12" PanningMode="VerticalOnly">
+                        <StackPanel>
+                            <!-- Keeping each time, marker and card in one row guarantees alignment at every width. -->
+                            <Grid MinHeight="158">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="72"/><ColumnDefinition Width="34"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                <StackPanel Margin="2,16,0,0"><TextBlock Text="08:30" Foreground="#C6CEE0" FontSize="15" FontWeight="SemiBold"/><TextBlock Text="AM" Foreground="#7F8BA3" FontSize="12" Margin="0,3,0,0"/></StackPanel>
+                                <Border Grid.Column="1" Width="1" Background="#5A4328" HorizontalAlignment="Center"/>
+                                <Ellipse Grid.Column="1" Width="12" Height="12" Fill="#C98A35" Stroke="#F2BE68" StrokeThickness="2" VerticalAlignment="Top" Margin="0,21,0,0"/>
+                                <Border Grid.Column="2" Style="{StaticResource TimelineCard}">
+                                    <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="22"/></Grid.RowDefinitions>
+                                        <Grid><Border Background="#352D5A" CornerRadius="7" Padding="8,4" HorizontalAlignment="Left"><TextBlock Text="Plot Development" Foreground="#C5AEFF" FontSize="11"/></Border><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Style="{StaticResource TimelineAction}" Content="&#xE70F;" ToolTip="Edit entry"/><Button Style="{StaticResource TimelineAction}" Content="&#xE712;" ToolTip="More options"/></StackPanel></Grid>
+                                        <TextBlock Grid.Row="1" Text="The Call to Adventure" FontSize="17" FontWeight="SemiBold" Margin="0,8,70,4" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Row="2" Text="Aarav received the mysterious letter that changed everything. The seal was unfamiliar, the words cryptic. He knew his life would never be the same." Foreground="#B8C1D4" FontSize="14" LineHeight="22" TextWrapping="Wrap" Margin="0,0,8,4"/>
+                                        <TextBlock Grid.Row="3" Text="142 words" Foreground="#7F899F" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="12"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <Grid MinHeight="158">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="72"/><ColumnDefinition Width="34"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                <StackPanel Margin="2,16,0,0"><TextBlock Text="01:15" Foreground="#C6CEE0" FontSize="15" FontWeight="SemiBold"/><TextBlock Text="PM" Foreground="#7F8BA3" FontSize="12" Margin="0,3,0,0"/></StackPanel>
+                                <Border Grid.Column="1" Width="1" Background="#5A4328" HorizontalAlignment="Center"/>
+                                <Ellipse Grid.Column="1" Width="12" Height="12" Fill="#C98A35" Stroke="#F2BE68" StrokeThickness="2" VerticalAlignment="Top" Margin="0,21,0,0"/>
+                                <Border Grid.Column="2" Style="{StaticResource TimelineCard}">
+                                    <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="22"/></Grid.RowDefinitions>
+                                        <Grid><Border Background="#193B72" CornerRadius="7" Padding="8,4" HorizontalAlignment="Left"><TextBlock Text="World Building" Foreground="#72A8FF" FontSize="11"/></Border><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Style="{StaticResource TimelineAction}" Content="&#xE70F;"/><Button Style="{StaticResource TimelineAction}" Content="&#xE712;"/></StackPanel></Grid>
+                                        <TextBlock Grid.Row="1" Text="The Kingdom of Elarion" FontSize="17" FontWeight="SemiBold" Margin="0,8,70,4" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Row="2" Text="Elarion is a land of floating islands, bound by ancient magic. The people harness the power of the crystal storms that surround their world." Foreground="#B8C1D4" FontSize="14" LineHeight="22" TextWrapping="Wrap" Margin="0,0,8,4"/>
+                                        <TextBlock Grid.Row="3" Text="168 words" Foreground="#7F899F" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="12"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <Grid MinHeight="158">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="72"/><ColumnDefinition Width="34"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                <StackPanel Margin="2,16,0,0"><TextBlock Text="06:45" Foreground="#C6CEE0" FontSize="15" FontWeight="SemiBold"/><TextBlock Text="PM" Foreground="#7F8BA3" FontSize="12" Margin="0,3,0,0"/></StackPanel>
+                                <Border Grid.Column="1" Width="1" Background="#5A4328" HorizontalAlignment="Center"/>
+                                <Ellipse Grid.Column="1" Width="12" Height="12" Fill="#C98A35" Stroke="#F2BE68" StrokeThickness="2" VerticalAlignment="Top" Margin="0,21,0,0"/>
+                                <Border Grid.Column="2" Style="{StaticResource TimelineCard}">
+                                    <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="22"/></Grid.RowDefinitions>
+                                        <Grid><Border Background="#17443E" CornerRadius="7" Padding="8,4" HorizontalAlignment="Left"><TextBlock Text="Character Development" Foreground="#62D1A0" FontSize="11"/></Border><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Style="{StaticResource TimelineAction}" Content="&#xE70F;"/><Button Style="{StaticResource TimelineAction}" Content="&#xE712;"/></StackPanel></Grid>
+                                        <TextBlock Grid.Row="1" Text="Aarav - Protagonist" FontSize="17" FontWeight="SemiBold" Margin="0,8,70,4" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Row="2" Text="Curious, determined, and haunted by dreams of a place he's never seen. He carries a locket his mother gave him before she disappeared." Foreground="#B8C1D4" FontSize="14" LineHeight="22" TextWrapping="Wrap" Margin="0,0,8,4"/>
+                                        <TextBlock Grid.Row="3" Text="123 words" Foreground="#7F899F" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="12"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <Grid MinHeight="158">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="72"/><ColumnDefinition Width="34"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                <StackPanel Margin="2,16,0,0"><TextBlock Text="09:30" Foreground="#C6CEE0" FontSize="15" FontWeight="SemiBold"/><TextBlock Text="PM" Foreground="#7F8BA3" FontSize="12" Margin="0,3,0,0"/></StackPanel>
+                                <Border Grid.Column="1" Width="1" Height="38" Background="#5A4328" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Ellipse Grid.Column="1" Width="12" Height="12" Fill="#C98A35" Stroke="#F2BE68" StrokeThickness="2" VerticalAlignment="Top" Margin="0,21,0,0"/>
+                                <Border Grid.Column="2" Style="{StaticResource TimelineCard}">
+                                    <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="22"/></Grid.RowDefinitions>
+                                        <Grid><Border Background="#493A16" CornerRadius="7" Padding="8,4" HorizontalAlignment="Left"><TextBlock Text="Personal Note" Foreground="#F1B83E" FontSize="11"/></Border><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Style="{StaticResource TimelineAction}" Content="&#xE70F;"/><Button Style="{StaticResource TimelineAction}" Content="&#xE712;"/></StackPanel></Grid>
+                                        <TextBlock Grid.Row="1" Text="Reflection" FontSize="17" FontWeight="SemiBold" Margin="0,8,70,4" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Row="2" Text="Good writing flow today. The world is becoming clearer. Need to research more about ancient languages." Foreground="#B8C1D4" FontSize="14" LineHeight="22" TextWrapping="Wrap" Margin="0,0,8,4"/>
+                                        <TextBlock Grid.Row="3" Text="74 words" Foreground="#7F899F" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="12"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Right rail -->
+        <Grid Grid.Column="2" Visibility="Collapsed" Panel.ZIndex="5" ClipToBounds="False" Margin="0,24,28,22"><Grid.RowDefinitions><RowDefinition Height="58"/><RowDefinition Height="248"/><RowDefinition Height="220"/><RowDefinition Height="212"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="48"/><ColumnDefinition Width="72"/></Grid.ColumnDefinitions>
+                <Border Style="{StaticResource Card}" Height="40" Padding="12,0"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource Icon}" Text="&#xE721;" Foreground="#93A0B8"/><TextBlock Text="Search entries..." Foreground="#8995AA" Margin="10,0,0,0" VerticalAlignment="Center"/></StackPanel></Border>
+                <Button Grid.Column="1" Style="{StaticResource GhostButton}" Margin="10,0,0,18" Padding="0"><TextBlock Style="{StaticResource Icon}" Text="&#xEA8F;"/></Button>
+                <Button Grid.Column="2" Style="{StaticResource GhostButton}" Margin="10,0,0,18" Padding="0"><StackPanel Orientation="Horizontal"><Ellipse Width="29" Height="29" Fill="#C99876"/><TextBlock Text="⌄" Margin="8,3,0,0"/></StackPanel></Button>
+            </Grid>
+            <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,10,0,10" Padding="16"><Grid><Grid.RowDefinitions><RowDefinition Height="38"/><RowDefinition/></Grid.RowDefinitions><TextBlock Text="Writing Overview" FontSize="16" FontWeight="SemiBold"/><UniformGrid Grid.Row="1" Columns="2" Rows="2">
+                <Border Style="{StaticResource Metric}"><StackPanel><StackPanel Orientation="Horizontal"><Border Background="#46307B" CornerRadius="15" Padding="7"><TextBlock Style="{StaticResource Icon}" Text="&#xE70F;" Foreground="#B68DFF"/></Border><TextBlock Text="1,247" FontSize="17" FontWeight="SemiBold" Margin="12,6,0,0"/></StackPanel><TextBlock Text="Words Today" Foreground="#9BA5BA" FontSize="12" Margin="44,4,0,0"/></StackPanel></Border>
+                <Border Style="{StaticResource Metric}"><StackPanel><StackPanel Orientation="Horizontal"><Border Background="#203F78" CornerRadius="15" Padding="7"><TextBlock Style="{StaticResource Icon}" Text="&#xE8A5;" Foreground="#72A8FF"/></Border><TextBlock Text="4" FontSize="17" FontWeight="SemiBold" Margin="12,6,0,0"/></StackPanel><TextBlock Text="Entries" Foreground="#9BA5BA" FontSize="12" Margin="44,4,0,0"/></StackPanel></Border>
+                <Border Style="{StaticResource Metric}"><StackPanel><StackPanel Orientation="Horizontal"><Border Background="#174E43" CornerRadius="15" Padding="7"><TextBlock Style="{StaticResource Icon}" Text="&#xE823;" Foreground="#4FD3A0"/></Border><TextBlock Text="12" FontSize="17" FontWeight="SemiBold" Margin="12,6,0,0"/></StackPanel><TextBlock Text="Day Streak" Foreground="#9BA5BA" FontSize="12" Margin="44,4,0,0"/></StackPanel></Border>
+                <Border Style="{StaticResource Metric}"><StackPanel><StackPanel Orientation="Horizontal"><Border Background="#604513" CornerRadius="15" Padding="7"><TextBlock Style="{StaticResource Icon}" Text="&#xE8A5;" Foreground="#F5B63B"/></Border><TextBlock Text="23,562" FontSize="17" FontWeight="SemiBold" Margin="12,6,0,0"/></StackPanel><TextBlock Text="Total Words" Foreground="#9BA5BA" FontSize="12" Margin="44,4,0,0"/></StackPanel></Border>
+            </UniformGrid></Grid></Border>
+            <Border Grid.Row="2" Style="{StaticResource Card}" Margin="0,5,0,10" Padding="16"><Grid><Grid.RowDefinitions><RowDefinition Height="38"/><RowDefinition/></Grid.RowDefinitions><TextBlock Text="Timeline Overview" FontSize="16" FontWeight="SemiBold"/><Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="135"/><ColumnDefinition/></Grid.ColumnDefinitions><Grid Width="112" Height="112"><Ellipse Stroke="#6F45D2" StrokeThickness="22"/><Ellipse Stroke="#4673D5" StrokeThickness="22" Margin="18"/><Ellipse Fill="#111929" Margin="35"/><TextBlock Text="40%" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#AEB7C9"/></Grid><StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="●  Plot Development     40%" Foreground="#C7CEDC" Margin="0,5"/><TextBlock Text="●  World Building       30%" Foreground="#8EA8E8" Margin="0,5"/><TextBlock Text="●  Character Dev.       20%" Foreground="#75CBA3" Margin="0,5"/><TextBlock Text="●  Personal Notes       10%" Foreground="#E5B34F" Margin="0,5"/></StackPanel></Grid></Grid></Border>
+            <Border Grid.Row="3" Style="{StaticResource Card}" Margin="0,5,0,10" Padding="16"><StackPanel><TextBlock Text="Today's Themes" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,16"/><WrapPanel><Border Style="{StaticResource Tag}"><TextBlock Text="# adventure"/></Border><Border Style="{StaticResource Tag}"><TextBlock Text="# magic"/></Border><Border Style="{StaticResource Tag}"><TextBlock Text="# mystery"/></Border><Border Style="{StaticResource Tag}"><TextBlock Text="# kingdom"/></Border><Border Style="{StaticResource Tag}"><TextBlock Text="# prophecy"/></Border></WrapPanel><Button Style="{StaticResource GhostButton}" Content="＋ Add Theme" HorizontalAlignment="Left" Padding="12,7"/></StackPanel></Border>
+            <Border Grid.Row="4" Style="{StaticResource Card}" Margin="0,5,0,0" Padding="16"><Grid><Grid.RowDefinitions><RowDefinition Height="38"/><RowDefinition/></Grid.RowDefinitions><TextBlock Text="Quick Note" FontSize="16" FontWeight="SemiBold"/><TextBox Grid.Row="1" Name="QuickNote" Text="Jot down a quick idea..." Foreground="#7F8A9F" Background="#111929" BorderBrush="#2A354B" BorderThickness="1" Padding="14" TextWrapping="Wrap" AcceptsReturn="True" GotFocus="QuickNote_GotFocus"/></Grid></Border>
+        </Grid>
+
+        <!-- Root-level decoration keeps the feather above the sidebar and timeline content. -->
+        <Image Grid.Column="0" Panel.ZIndex="50" Source="Assets/side-feather.png" Width="150" Height="300" Stretch="Uniform" Opacity="0.96" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-75,-12" RenderTransformOrigin="0.5,0.5"><Image.RenderTransform><RotateTransform Angle="28"/></Image.RenderTransform></Image>
+
+        <Grid x:Name="NewEntryOverlay" Grid.ColumnSpan="3" Panel.ZIndex="100" Visibility="Collapsed" Background="#F205070A">
+            <local:NewEntryWindow x:Name="NewEntryComposer" CloseRequested="NewEntryComposer_CloseRequested"/>
+        </Grid>
+    </Grid>
+</Window>

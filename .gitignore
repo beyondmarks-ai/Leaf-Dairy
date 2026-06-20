@@ -1,0 +1,20 @@
+# .NET build output
+bin/
+obj/
+build/
+
+# Visual Studio and Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test and publish output
+TestResults/
+publish/
+
+# Operating system files
+.DS_Store
+Thumbs.db
